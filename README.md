@@ -10,18 +10,19 @@ For more details on these methods and the optimizations applied, please see [Imp
 
 ## Examples
 
-    double f(double x) { return acos(x); }
-    printf("integrate(acos(x), x=0..1) = %.15g\n", quad(f, 0,         1,        6, 1e-9, NULL));
+Level max `n=6` is recommended for IEEE 754 double floating point precision and a relative error tolerance `eps=1e-9` for maximum precision of the result with 9 digits or more:
 
-Displays `1`, the exact integral of \( \int_0^1 \arccos(x)\,dx \)
+    double f(double x) { return acos(x); }
+    printf("integrate(acos(x), x=0..1) = %.15g\n", quad(f, 0, 1, 6, 1e-9, NULL));
+
+Displays `1`, the exact integral with 15 digits precise.
 
     double f(double x) { return exp(-x/5); }
-    printf("integrate(exp(-x/5), x=0..+inf)      = %.15g\n", quad(f, 0,         INFINITY, 6, 1e-9, NULL));
+    printf("integrate(exp(-x/5), x=0..+inf) = %.15g\n", quad(f, 0, INFINITY, 6, 1e-9, NULL));
 
-Displays `5`, the exact integral.
+Displays `5`, the exact integral with 15 digits precise.
 
     double f(double x) { return pow(cosh(x),-2); }
     printf("integrate(1/cosh(x)^2, x=-inf..+inf) = %.15g\n", quad(f, -INFINITY, INFINITY, 6, 1e-9, NULL));
 
-Displays `2`, the exact integral.
-
+Displays `2`, the exact integral with 15 digits precise.
