@@ -9,52 +9,6 @@
 
 ' Functions to integrate are defined with label "F1", "F2",... should return Y given X
 
-' Algorithm:
-'   double qthsh(double (*f)(double), double a, double b, double n, double eps) {
-'     const double tol = 10*eps;
-'     double c = (a+b)/2; // center (mean)
-'     double d = (b-a)/2; // half distance
-'     double s = f(c);
-'     double e, v, h = 2;
-'     int k = 0;
-'     if (n <= 0) // use default levels n=6
-'       n = 6; // 6 is optimal, 7 just as good taking longer
-'     if (eps <= 0) // use default eps=1E=9
-'       eps = 1E-9;
-'     do {
-'       double p = 0, q, fp = 0, fm = 0, t, eh;
-'       h /= 2;
-'       eh = exp(h);
-'       t = eh;
-'       if (k > 0)
-'         eh *= eh;
-'       do {
-'         double u = exp(1/t-t);      // = exp(-2*sinh(j*h)) = 1/exp(sinh(j*h))^2
-'         double r = 2*u/(1+u);       // = 1 - tanh(sinh(j*h))
-'         double w = (t+1/t)*r/(1+u); // = cosh(j*h)/cosh(sinh(j*h))^2
-'         double x = d*r;
-'         if (a+x > a) {              // if too close to a then reuse previous fp
-'           double y = f(a+x);
-'           if (isfinite(y))
-'             fp = y;                 // if f(x) is finite, add to local sum
-'         }
-'         if (b-x < b) {              // if too close to b then reuse previous fm
-'           double y = f(b-x);
-'           if (isfinite(y))
-'             fm = y;                 // if f(x) is finite, add to local sum
-'         }
-'         q = w*(fp+fm);
-'         p += q;
-'         t *= eh;
-'       } while (fabs(q) > eps*fabs(p));
-'       v = s-p;
-'       s += p;
-'       ++k;
-'     } while (fabs(v) > tol*fabs(s) && k <= n);
-'     e = fabs(v)/(fabs(s)+eps);
-'     return d*s*h; // result with estimated relative error e
-'   }
-
 ' VARIABLES
 '  A,B     range
 '  F$      function label to integrate
