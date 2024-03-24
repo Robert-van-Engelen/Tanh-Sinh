@@ -34,4 +34,8 @@ Do you intend to add a new feature or change an existing one?
 
 Contributions are covered under the [BSD-3 license](LICENSE.txt).
 
+Note that the C and BASIC source code are also covered under the MIT license as
+stated in my article "Improving the Double Exponential Quadrature Tanh-Sinh,
+Sinh-Sinh and Exp-Sinh Formulas".
+
 Thanks!
